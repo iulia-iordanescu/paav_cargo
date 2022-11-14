@@ -1,0 +1,14 @@
+# https://hub.docker.com/_/python
+# https://github.com/docker-library/python/blob/master/3.10/bullseye/Dockerfile
+# https://luis-sena.medium.com/creating-the-perfect-python-dockerfile-51bdec41f1c8
+
+FROM python:3
+
+WORKDIR /workspace/src/app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# COPY . .
+
+EXPOSE 8889
