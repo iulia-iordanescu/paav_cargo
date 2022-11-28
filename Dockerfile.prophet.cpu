@@ -1,0 +1,31 @@
+# from https://raw.githubusercontent.com/facebook/prophet/main/Dockerfile
+FROM python:3.7-stretch
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libc-dev \      
+    build-essential libssl-dev libffi-dev 
+
+# RUN python -m pip install  cryptography
+# RUN pip install pip==19.1.1
+
+# https://github.com/facebook/prophet#installation-in-python---development-version
+WORKDIR /tmp/
+RUN git clone https://github.com/facebook/prophet.git
+WORKDIR /tmp/prophet/python
+RUN python -m pip install -r requirements.txt
+RUN python setup.py install
+
+RUN python -m pip install --no-cache-dir jupyterlab matplotlib
+RUN python -m pip install --no-cache-dir jupyter_http_over_ws ipykernel nbformat  jedi 
+RUN jupyter serverextension enable --py jupyter_http_over_ws
+RUN python -m pip install --no-cache-dir ipywidgets widgetsnbextension pandas-profiling
+
+COPY requirements.txt /tmp/
+RUN python -m pip install --requirement /tmp/requirements.txt
+
+WORKDIR /
+
+EXPOSE 8888
+
+RUN python -m ipykernel.kernelspec
+RUN jupyter nbextension enable --py widgetsnbextension
