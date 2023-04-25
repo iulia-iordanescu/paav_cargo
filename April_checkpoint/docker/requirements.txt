@@ -1,0 +1,11 @@
+matplotlib
+pandas
+xgboost
+seaborn
+scikit-learn
+jupyterlab
+statsmodels
+plotly
+pydot
+ipywidgets
+ipython
