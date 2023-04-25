@@ -1,0 +1,16 @@
+docker build -t pythondockerimage -f Dockerfile.cpu .
+
+cd .\..\..\
+
+docker run ^
+-it ^
+--rm ^
+--name container01 ^
+-p 8888:8889  ^
+-v %cd%:/workspace:rw ^
+pythondockerimage ^
+/bin/bash
+
+jupyter lab --notebook-dir=/ --ip='*' --port=8889 --no-browser --allow-root
+
+http://127.0.0.1:8888/lab
