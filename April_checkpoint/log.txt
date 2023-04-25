@@ -14,3 +14,10 @@ paavcargodfc \
 /bin/bash -c "jupyter lab --notebook-dir=/ --ip='*' --port=8888 --no-browser --allow-root"
 
 http://127.0.0.1:8890/lab
+
+
+
+#---------------------------------
+git fetch --all
+git branch -va
+git pull origin some_branch
